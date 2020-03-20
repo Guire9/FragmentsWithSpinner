@@ -1,6 +1,7 @@
 package edu.temple.fragmentswithspinner;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -18,16 +19,28 @@ import android.widget.Spinner;
  */
 public class SpinnerFragment extends Fragment {
 
-
+    View rootView;
+    ColorSelectedInterface parentActivity;
     public SpinnerFragment() {
         // Required empty public constructor
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof ColorSelectedInterface) {
+            parentActivity = (ColorSelectedInterface) context;
+        } else {
+            throw new RuntimeException("Please Implement the ButtonClickedListener Interface!!!!!!!");
+        }
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_spinner, container, false);
+        rootView = inflater.inflate(R.layout.fragment_spinner, container, false);
 
         Resources res = getResources();
         String[] colors = res.getStringArray(R.array.colors);
@@ -42,6 +55,7 @@ public class SpinnerFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 view.setBackgroundColor(0xffffffff);
+                parentActivity.ColorSelected();
             }
 
             @Override
@@ -50,7 +64,11 @@ public class SpinnerFragment extends Fragment {
             }
 
         });
+
         return rootView;
 
+    }
+    interface ColorSelectedInterface {
+        public void ColorSelected();
     }
 }
