@@ -1,14 +1,9 @@
 package edu.temple.fragmentswithspinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements SpinnerFragment.ColorSelectedInterface {
     SpinnerFragment f1;
@@ -27,10 +22,9 @@ public class MainActivity extends AppCompatActivity implements SpinnerFragment.C
 
     }
 
-
     @Override
-    public void ColorSelected() {
-       // Toast.makeText(getBaseContext(), "it works" , Toast.LENGTH_SHORT ).show();
-        f2.changeColor2();
+    public void ColorSelected(String c) {
+        int x= Color.parseColor(c);
+        f2.changeColor2(x);
     }
 }

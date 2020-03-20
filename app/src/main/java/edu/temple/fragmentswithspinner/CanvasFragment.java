@@ -1,16 +1,12 @@
 package edu.temple.fragmentswithspinner;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Random;
+import androidx.fragment.app.Fragment;
 
 
 /**
@@ -18,7 +14,8 @@ import java.util.Random;
  */
 public class CanvasFragment extends Fragment {
 
-    View layout;
+    private View layout;
+
     public CanvasFragment() {
         // Required empty public constructor
     }
@@ -28,14 +25,12 @@ public class CanvasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        layout =inflater.inflate(R.layout.fragment_canvas, container, false);;
-        changeColor2();
+        layout =inflater.inflate(R.layout.fragment_canvas, container, false);
+        changeColor2(0);
         return layout;
     }
-    public void changeColor2() {
-        int colors[] = {Color.RED, Color.BLUE, Color.GREEN, Color.GRAY, Color.MAGENTA, Color.CYAN};
-        int colorIndex = (new Random()).nextInt(colors.length);
-        layout.setBackgroundColor(colors[colorIndex]);
+    public void changeColor2(int x) {
+        layout.setBackgroundColor(x);
 
     }
 }
