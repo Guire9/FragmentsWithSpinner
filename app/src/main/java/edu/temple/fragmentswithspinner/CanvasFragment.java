@@ -6,21 +6,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CanvasFragment extends Fragment {
 
+    private static final String ID_KEY = "id";
     private View layout;
+    int id;
 
     public CanvasFragment() {
         // Required empty public constructor
     }
-
-
+    public static CanvasFragment newInstance (int id) {
+        CanvasFragment fragment = new CanvasFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ID_KEY, id);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getInt("id");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,6 +46,9 @@ public class CanvasFragment extends Fragment {
     }
     public void changeColor2(int x) {
         layout.setBackgroundColor(x);
-
+        CanvasFragment.newInstance(id);
+    }
+    public int getFragmentId() {
+        return id;
     }
 }
